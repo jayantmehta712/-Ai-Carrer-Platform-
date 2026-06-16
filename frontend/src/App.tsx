@@ -75,7 +75,39 @@ function App() {
       setRecommendations(recommendationData);
       setSkillGap(skillGapData);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unable to analyze career profile');
+      setApiStatus('Static demo mode');
+      setError('');
+      setRecommendations([
+        {
+          id: 'demo-1',
+          careerPath: 'Full Stack Developer',
+          score: 0.93,
+          reasoning: `${profile.skills.slice(0, 3).join(', ')} gives you a strong base for building complete web applications.`,
+        },
+        {
+          id: 'demo-2',
+          careerPath: 'Frontend Engineer',
+          score: 0.88,
+          reasoning: `Your interests in ${profile.interests.slice(0, 2).join(', ')} fit user-facing product development.`,
+        },
+        {
+          id: 'demo-3',
+          careerPath: 'AI Product Developer',
+          score: 0.81,
+          reasoning: 'Combining web development with AI interests can lead to practical AI-powered applications.',
+        },
+      ]);
+      setSkillGap({
+        targetCareer,
+        currentSkills: profile.skills,
+        missingSkills: ['System Design', 'Testing', 'Deployment'],
+        developmentPath: [
+          { skill: 'System Design', timeframe: '4-6 weeks' },
+          { skill: 'Testing', timeframe: '2-4 weeks' },
+          { skill: 'Deployment', timeframe: '2-3 weeks' },
+        ],
+      });
+      console.info(err instanceof Error ? err.message : 'Using static demo fallback');
     } finally {
       setLoading(false);
     }
