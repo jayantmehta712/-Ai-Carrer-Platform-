@@ -1,227 +1,124 @@
 # Career AI Platform
 
-A modern AI-powered career guidance platform that provides personalized career recommendations and skill gap analysis.
-
-## Project Structure
-
-```
-career-ai-platform/
-├── frontend/                 # React + TypeScript + Vite frontend
-│   ├── src/
-│   │   ├── components/      # Reusable React components
-│   │   ├── pages/          # Page components
-│   │   ├── services/       # API services
-│   │   ├── hooks/          # Custom React hooks
-│   │   ├── types/          # TypeScript type definitions
-│   │   ├── styles/         # CSS styles
-│   │   ├── utils/          # Utility functions
-│   │   ├── App.tsx         # Main App component
-│   │   └── main.tsx        # Entry point
-│   ├── package.json
-│   ├── tsconfig.json
-│   ├── vite.config.ts
-│   └── index.html
-│
-├── backend/                  # Node.js + Express + TypeScript backend
-│   ├── src/
-│   │   ├── routes/         # API routes
-│   │   ├── controllers/    # Route controllers
-│   │   ├── services/       # Business logic services
-│   │   ├── models/         # Data models and types
-│   │   ├── middleware/     # Express middleware
-│   │   ├── utils/          # Utility functions
-│   │   └── index.ts        # Server entry point
-│   ├── dist/               # Compiled JavaScript
-│   ├── package.json
-│   ├── tsconfig.json
-│   ├── .env.example        # Environment variables template
-│   └── .gitignore
-│
-├── .gitignore              # Git ignore file
-└── README.md              # This file
-```
+A full-stack career guidance application with a React frontend and Node.js/Express backend. It generates career recommendations and skill-gap analysis from a user's skills, experience, interests, and target role.
 
 ## Features
 
-- 🤖 **AI-Powered Recommendations**: Get personalized career path suggestions based on your profile
-- 🎯 **Skill Gap Analysis**: Identify missing skills and get a development roadmap
-- 💼 **Career Insights**: Detailed reasoning for each recommendation
-- 🚀 **Real-time Processing**: Fast analysis using modern AI models
-- 📱 **Responsive Design**: Works seamlessly on desktop and mobile devices
+- Career profile form for skills, experience, interests, and target career.
+- Backend health check endpoint.
+- Career recommendation API.
+- Skill-gap analysis API.
+- Responsive React frontend with a clean interview-ready interface.
+- TypeScript builds for both frontend and backend.
 
 ## Tech Stack
 
-### Frontend
-- **React 18** - UI library
-- **TypeScript** - Type-safe JavaScript
-- **Vite** - Next generation build tool
-- **Tailwind CSS** - Utility-first CSS framework
+| Layer | Tools |
+| --- | --- |
+| Frontend | React, TypeScript, Vite, CSS |
+| Backend | Node.js, Express, TypeScript |
+| API | REST JSON endpoints |
 
-### Backend
-- **Node.js** - JavaScript runtime
-- **Express.js** - Web framework
-- **TypeScript** - Type-safe server code
-- **Cors** - Cross-origin resource sharing
-- **Dotenv** - Environment configuration
+## Project Structure
 
-## Getting Started
-
-### Prerequisites
-- Node.js (v16 or higher)
-- npm or yarn
-
-### Installation
-
-1. **Clone the repository**
-```bash
-git clone <repository-url>
-cd career-ai-platform
+```text
+career-ai-platform/
+  backend/
+    src/
+      controllers/
+      routes/
+      services/
+      index.ts
+    package.json
+    tsconfig.json
+  frontend/
+    src/
+      App.tsx
+      App.css
+      services/
+      hooks/
+      types/
+    package.json
+    vite.config.ts
+  README.md
+  QUICKSTART.md
 ```
 
-2. **Setup Backend**
-```bash
-cd backend
+## Backend Setup
 
-# Install dependencies
-npm install
-
-# Create .env file from template
-cp .env.example .env
-
-# Edit .env with your configuration
-# PORT=5000
-# NODE_ENV=development
-# DATABASE_URL=mongodb://localhost:27017/career-ai
-# JWT_SECRET=your_jwt_secret_key_here
-# OPENAI_API_KEY=your_openai_api_key_here
-# FRONTEND_URL=http://localhost:5173
-```
-
-3. **Setup Frontend**
-```bash
-cd ../frontend
-
-# Install dependencies
-npm install
-
-# Create .env.local file
-echo "VITE_API_BASE_URL=http://localhost:5000" > .env.local
-```
-
-### Running the Application
-
-**Terminal 1 - Start Backend:**
 ```bash
 cd backend
-npm run dev
-# Server will run on http://localhost:5000
+npm install
+npm run build
+npm start
 ```
 
-**Terminal 2 - Start Frontend:**
+Backend URL:
+
+```text
+http://localhost:5000
+```
+
+## Frontend Setup
+
+Open a second terminal:
+
 ```bash
 cd frontend
+npm install
 npm run dev
-# App will run on http://localhost:5173
+```
+
+Frontend URL:
+
+```text
+http://localhost:5173
+```
+
+If the backend runs on a different URL, create `frontend/.env.local`:
+
+```text
+VITE_API_BASE_URL=http://localhost:5000
 ```
 
 ## API Endpoints
 
-### Health Check
-```
-GET /api/health
-```
+| Method | Endpoint | Purpose |
+| --- | --- | --- |
+| GET | `/api/health` | Check backend status |
+| POST | `/api/career/recommendations` | Generate career recommendations |
+| POST | `/api/career/skill-gap` | Analyze missing skills for a target career |
 
-### Career Recommendations
-```
-POST /api/career/recommendations
-Content-Type: application/json
+Example recommendation request:
 
-Body:
+```json
 {
   "skills": ["JavaScript", "React", "Node.js"],
-  "experience": "5",
+  "experience": "2",
   "interests": ["AI", "Web Development"]
 }
 ```
 
-### Skill Gap Analysis
-```
-POST /api/career/skill-gap
-Content-Type: application/json
+## Verification
 
-Body:
-{
-  "userSkills": ["JavaScript", "React"],
-  "targetCareer": "Full Stack Developer"
-}
-```
+Backend:
 
-## Development
-
-### Backend Development
 ```bash
 cd backend
-
-# Start dev server with hot reload
-npm run dev
-
-# Build TypeScript
 npm run build
-
-# Start production server
-npm start
-
-# Clean build files
-npm run clean
 ```
 
-### Frontend Development
+Frontend:
+
 ```bash
 cd frontend
-
-# Start dev server
-npm run dev
-
-# Build for production
 npm run build
-
-# Preview production build
-npm run preview
 ```
 
-## Environment Variables
+## Interview Talking Points
 
-### Backend (.env)
-```
-PORT=5000
-NODE_ENV=development
-DATABASE_URL=mongodb://localhost:27017/career-ai
-JWT_SECRET=your_jwt_secret_key_here
-OPENAI_API_KEY=your_openai_api_key_here
-FRONTEND_URL=http://localhost:5173
-```
-
-### Frontend (.env.local)
-```
-VITE_API_BASE_URL=http://localhost:5000
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Support
-
-For support, email support@careeraiplatform.com or open an issue in the repository.
-
----
-
-**Last Updated**: June 2024
+- Built a full-stack TypeScript app with separate frontend and backend.
+- Designed reusable REST endpoints for recommendations and skill-gap analysis.
+- Added strict TypeScript builds for both layers.
+- Refactored the frontend into a polished responsive interface.
+- Structured the project so it can be extended with a real AI provider later.

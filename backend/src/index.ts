@@ -1,6 +1,7 @@
 import express, { Express, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import careerRoutes from './routes/careerRoutes';
 
 dotenv.config();
 
@@ -16,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.get('/api/health', (req: Request, res: Response) => {
+app.get('/api/health', (_req: Request, res: Response) => {
   res.json({
     status: 'OK',
     message: 'Career AI Platform Backend is running',
@@ -24,8 +25,9 @@ app.get('/api/health', (req: Request, res: Response) => {
   });
 });
 
-// API Routes will be added here
-app.get('/api/users', (req: Request, res: Response) => {
+app.use('/api/career', careerRoutes);
+
+app.get('/api/users', (_req: Request, res: Response) => {
   res.json({
     message: 'Users endpoint',
     users: []
@@ -33,7 +35,7 @@ app.get('/api/users', (req: Request, res: Response) => {
 });
 
 // Error handling middleware
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   console.error(err.stack);
   res.status(500).json({
     error: 'Internal Server Error',

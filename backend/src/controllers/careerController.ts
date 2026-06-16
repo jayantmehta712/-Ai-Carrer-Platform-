@@ -16,12 +16,12 @@ export class CareerController {
         interests: interests || []
       });
 
-      res.json({
+      return res.json({
         success: true,
         data: recommendations
       });
     } catch (error) {
-      res.status(500).json({
+      return res.status(500).json({
         error: 'Failed to generate recommendations',
         message: error instanceof Error ? error.message : 'Unknown error'
       });
@@ -43,12 +43,12 @@ export class CareerController {
         targetCareer
       );
 
-      res.json({
+      return res.json({
         success: true,
         data: analysis
       });
     } catch (error) {
-      res.status(500).json({
+      return res.status(500).json({
         error: 'Failed to analyze skill gap',
         message: error instanceof Error ? error.message : 'Unknown error'
       });

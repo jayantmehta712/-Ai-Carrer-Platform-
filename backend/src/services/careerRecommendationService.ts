@@ -1,12 +1,4 @@
-import axios from 'axios';
-
 export class CareerRecommendationService {
-  private openaiApiKey: string;
-
-  constructor() {
-    this.openaiApiKey = process.env.OPENAI_API_KEY || '';
-  }
-
   async generateCareerRecommendations(
     userProfile: {
       skills: string[];
@@ -15,20 +7,25 @@ export class CareerRecommendationService {
     }
   ) {
     try {
-      // This would integrate with OpenAI API
-      // Placeholder for actual API integration
+      const skillSummary = userProfile.skills.length
+        ? `Your ${userProfile.skills.slice(0, 3).join(', ')} skills are a strong fit`
+        : 'Your profile shows useful technical foundations';
+      const interestSummary = userProfile.interests.length
+        ? ` and your interests in ${userProfile.interests.slice(0, 2).join(', ')} add direction`
+        : '';
+
       const recommendations = [
         {
           id: '1',
           careerPath: 'Full Stack Developer',
           score: 0.95,
-          reasoning: 'Based on your technical skills and experience'
+          reasoning: `${skillSummary}${interestSummary}.`
         },
         {
           id: '2',
           careerPath: 'Solutions Architect',
           score: 0.87,
-          reasoning: 'Your experience and problem-solving skills align well'
+          reasoning: `${userProfile.experience || 'Your'} years of experience can support system design and client-facing problem solving.`
         },
         {
           id: '3',

@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { careerService } from '../services/careerService';
+import type { CareerRecommendation, SkillGapAnalysis } from '../types';
 
 export const useCareerRecommendations = () => {
-  const [recommendations, setRecommendations] = useState([]);
+  const [recommendations, setRecommendations] = useState<CareerRecommendation[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -27,7 +28,7 @@ export const useCareerRecommendations = () => {
 };
 
 export const useSkillGapAnalysis = () => {
-  const [analysis, setAnalysis] = useState(null);
+  const [analysis, setAnalysis] = useState<SkillGapAnalysis | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
